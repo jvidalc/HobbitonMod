@@ -19,10 +19,10 @@ namespace HobbitonMod.NPCs.Hobbits
             npc.townNPC = true;
             npc.friendly = true;
             npc.width = 18; //the npc sprite width
-            npc.height = 38;
+            npc.height = 33; //a hobbits height
             npc.aiStyle = 7; //this is the npc ai style, 7 is Pasive Ai
             npc.defense = 25;  //the npc defense
-            npc.lifeMax = 250;  // the npc life
+            npc.lifeMax = 200;  // the npc life
             npc.HitSound = SoundID.NPCHit1;  //the npc sound when is hit
             npc.DeathSound = SoundID.NPCDeath1;  //the npc sound when he dies
             npc.knockBackResist = 0.5f;  //the npc knockback resistance
