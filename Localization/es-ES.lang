@@ -1,0 +1,4 @@
+Common.Sting=Dardo
+
+ItemName.Sting={$Mods.HobbitonMod.Common.Sting}
+ItemTooltip.Sting="¡La espada brilla cuando se acercan enemigos!"

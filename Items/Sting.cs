@@ -9,16 +9,17 @@ namespace HobbitonMod.Items
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("¡La espada brilla cuando se acercan enemigos!");
-        }
+            Tooltip.SetDefault("It shines when enemies are nearby!");
+        }   
 
         public override void SetDefaults()
         {
-            //item.name = "Dardo"; // The item display name in-game.
+            //item.Name = "Sting"; // The item display name in-game. Read-only.
+
             //Weapon attributes
             item.damage = 35;
             item.melee = true;
-            item.useStyle = 3;  // sword use
+            item.useStyle = ItemUseStyleID.SwingThrow;  // sword use
             item.knockBack = 4;
             item.autoReuse = true; // "Auto swing"
 
@@ -28,8 +29,8 @@ namespace HobbitonMod.Items
             item.height = 16;
             item.value = 100;
             item.rare = 8;  // yellow color
-            item.value = Item.buyPrice(2, 0, 0, 0); // The items value in PGSC.
-            item.useAnimation = 30; // 30 = half a second (Terraria runs at 60frames/sec)
+            item.value = Item.buyPrice(0, 0, 0, 1); // The items value in PGSC.
+            item.useAnimation = 20; // 30 = half a second (Terraria runs at 60frames/sec)
 
 
 

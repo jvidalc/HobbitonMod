@@ -130,7 +130,9 @@ namespace HobbitonMod.NPCs.Hobbits
             shop.item[nextSlot].SetDefaults(ItemID.WoodFishingPole); //Wood Fishing Pole 2289
             nextSlot++; 
             shop.item[nextSlot].SetDefaults(ItemID.Ale); //Ale 353
-            nextSlot++; 
+            nextSlot++;
+            shop.item[nextSlot].SetDefaults(mod.ItemType("Sting")); //Custom item: Sting
+            nextSlot++;
 
             // v1.4 Items
             /*
