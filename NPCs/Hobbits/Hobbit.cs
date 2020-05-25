@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 namespace HobbitonMod.NPCs.Hobbits
 {
     [AutoloadHead]
-    public class Hobbit1 : ModNPC
+    public class Hobbit : ModNPC
     {
         public override void SetDefaults()
         {
@@ -210,7 +210,7 @@ namespace HobbitonMod.NPCs.Hobbits
             base.Autoload(ref name);
 
             //EventManager.Initialize();
-            //Mod.AddNPC("el Hobbit", new Hobbit1());
+            //Mod.AddNPC("el Hobbit", new Hobbit());
             return true;
         }
 */ 
