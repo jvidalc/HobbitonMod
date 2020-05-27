@@ -1,0 +1,6 @@
+# Traducciones para Dardo
+
+Common.Sting=Sting
+
+ItemName.Sting={$Mods.HobbitonMod.Common.Sting}
+ItemTooltip.Sting="It shines when enemies are nearby!"

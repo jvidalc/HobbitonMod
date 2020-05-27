@@ -108,61 +108,83 @@ namespace HobbitonMod.NPCs.Hobbits
             }
             if (NPC.downedBoss3)   // Skeletron 
             {
-                shop.item[nextSlot].SetDefaults(ItemID.BookofSkulls);
+                shop.item[nextSlot].SetDefaults(mod.ItemType("Sting")); //Custom item: Sting
                 nextSlot++;
             }
-            shop.item[nextSlot].SetDefaults(ItemID.Mushroom); //Mushroom 5
+            shop.item[nextSlot].SetDefaults(ItemID.Mushroom);
             nextSlot++; 
-            shop.item[nextSlot].SetDefaults(ItemID.BottledHoney); //Bottled Honey
+            shop.item[nextSlot].SetDefaults(ItemID.BottledHoney);
             nextSlot++; 
-            shop.item[nextSlot].SetDefaults(ItemID.Barrel); //Barrel 343
+            shop.item[nextSlot].SetDefaults(ItemID.Barrel);
             nextSlot++; 
-            shop.item[nextSlot].SetDefaults(ItemID.Bench); //Bench 89
+            shop.item[nextSlot].SetDefaults(ItemID.Bench);
             nextSlot++; 
-            shop.item[nextSlot].SetDefaults(ItemID.Fireplace); //Fireplace 3364
+            shop.item[nextSlot].SetDefaults(ItemID.Fireplace);
             nextSlot++; 
-            shop.item[nextSlot].SetDefaults(ItemID.BugNet); //Bug net 1991
+            shop.item[nextSlot].SetDefaults(ItemID.BugNet);
             nextSlot++; 
-            shop.item[nextSlot].SetDefaults(ItemID.Sickle); //Sickle 1786
+            shop.item[nextSlot].SetDefaults(ItemID.Sickle);
             nextSlot++; 
-            shop.item[nextSlot].SetDefaults(ItemID.PumpkinPie); //Pumpkin Pie 1787
+            shop.item[nextSlot].SetDefaults(ItemID.PumpkinPie);
             nextSlot++; 
-            shop.item[nextSlot].SetDefaults(ItemID.WoodFishingPole); //Wood Fishing Pole 2289
+            shop.item[nextSlot].SetDefaults(ItemID.WoodFishingPole);
             nextSlot++; 
-            shop.item[nextSlot].SetDefaults(ItemID.Ale); //Ale 353
+            shop.item[nextSlot].SetDefaults(ItemID.Ale);
             nextSlot++;
-            shop.item[nextSlot].SetDefaults(mod.ItemType("Sting")); //Custom item: Sting
-            nextSlot++;
+
 
             // v1.4 Items
             /*
-            shop.item[nextSlot].SetDefaults(4291); //Lemon
+            shop.item[nextSlot].SetDefaults(ItemID.Lemon);
             nextSlot++; 
-            shop.item[nextSlot].SetDefaults(4031); //Roasted Bird
+            shop.item[nextSlot].SetDefaults(ItemID.RoastedBird);
             nextSlot++; 
-            shop.item[nextSlot].SetDefaults(4032); //Roasted Duck
+            shop.item[nextSlot].SetDefaults(ItemID.RoastedDuck);
             nextSlot++; 
-            shop.item[nextSlot].SetDefaults(ItemID.Grapes); //Grapes 4023
+            shop.item[nextSlot].SetDefaults(ItemID.Grapes);
             nextSlot++; 
             */
         }
- 
+
         public override string GetChat()       //Allows you to give this town NPC a chat message when a player talks to it.
         {
-            switch (Main.rand.Next(4))         //these are the messages when you talk to the npc
+            string chat;
+            int numSentences = 4;
+            if (NPC.downedBoss1)
+                numSentences = 5;
+            if (NPC.downedBoss2)
+                numSentences = 6;
+            if (NPC.downedBoss3)
+                numSentences = 7;
+            switch (Main.rand.Next(numSentences))         //these are the messages when you talk to the npc
             {
                 case 0:
-                    return "Hi! Do you know the way to Hobbiton? I think I'm a bit lost...";
+                    chat ="¡Hola! ¿Sabe cómo llegar a la Comarca? Creo que me he perdido...";
+                    break;
                 case 1:
-                    return "Â¿Necesitas algo?";
+                    chat = "¿Necesita algo?";
+                    break;
                 case 2:
-                    return "Vaya casoncio, colega. En la comarca hay pocos que puedan permitirse algo asÃ­.";
+                    chat ="¡Menuda casa! Sólo unos pocos pueden permitirse algo así en la Comarca.";
+                    break;
                 case 3:
-                    return "Â¿Tienes fuego?";
+                    chat = "¿Tiene fuego?";
+                    break;
+                case 4:
+                    chat = "Un día tengo que invitarle al Pony Pisador. Buenas pintas sirven allí. Son caras pero merece la pena.";
+                    break;
+                case 5:
+                    chat = "Hizo usted un buen trabajo con ese ojo enorme. Yo también he tenido alguna experiencia con ojos gigantes...";
+                    break;
+                case 6:
+                    chat = "No sé cómo es usted capaz de acabar con todas esas abominaciones a las que llaman jefes. ¡Qué haríamos sin usted!";
+                    break;
                 default:
-                    return "Un dÃ­a tengo que invitarte al Pony Pisador. Menudas birras ponen ahÃ­. Son caras pero merece la pena.";
+                    chat = "¡Y además habéis acabado con el abominable esqueleto! He conocido muy pocos héroes de su nivel.";
+                    break;
  
             }
+            return chat;
         }
         public override void TownNPCAttackStrength(ref int damage, ref float knockback)//  Allows you to determine the damage and knockback of this town NPC attack
         {

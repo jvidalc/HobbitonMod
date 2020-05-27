@@ -1,4 +1,4 @@
 displayName = Hobbiton Mod
 author = jvidalc
-version = 0.8.4
+version = 0.9
 homepage = https://forums.terraria.org/index.php?threads/hobbitonmod-add-a-hobbit-npc.90425/

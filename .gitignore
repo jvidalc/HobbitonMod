@@ -1,5 +1,11 @@
 ## Ignore images folder, where forum pics are stored
 [Ii]mages/
 
-# Specific files
+## Ignore VS stuff
+*.sln
+.vs
+bin/
+obj/
+
+## Specific files
 *.ico
