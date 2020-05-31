@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.ID;
@@ -159,28 +157,28 @@ namespace HobbitonMod.NPCs.Hobbits
             switch (Main.rand.Next(numSentences))         //these are the messages when you talk to the npc
             {
                 case 0:
-                    chat ="¡Hola! ¿Sabe cómo llegar a la Comarca? Creo que me he perdido...";
+                    chat ="Â¡Hola! Â¿Sabe cÃ³mo llegar a la Comarca? Creo que me he perdido...";
                     break;
                 case 1:
-                    chat = "¿Necesita algo?";
+                    chat = "Â¿Necesita algo?";
                     break;
                 case 2:
-                    chat ="¡Menuda casa! Sólo unos pocos pueden permitirse algo así en la Comarca.";
+                    chat ="Â¡Menuda casa! SÃ³lo unos pocos pueden permitirse algo asÃ­ en la Comarca.";
                     break;
                 case 3:
-                    chat = "¿Tiene fuego?";
+                    chat = "Â¿Tiene fuego?";
                     break;
                 case 4:
-                    chat = "Un día tengo que invitarle al Pony Pisador. Buenas pintas sirven allí. Son caras pero merece la pena.";
+                    chat = "Un dÃ­a tengo que invitarle al Pony Pisador. Buenas pintas sirven allÃ­. Son caras pero merece la pena.";
                     break;
                 case 5:
-                    chat = "Hizo usted un buen trabajo con ese ojo enorme. Yo también he tenido alguna experiencia con ojos gigantes...";
+                    chat = "Hizo usted un buen trabajo con ese ojo enorme. Yo tambiÃ©n he tenido alguna experiencia con ojos gigantes...";
                     break;
                 case 6:
-                    chat = "No sé cómo es usted capaz de acabar con todas esas abominaciones a las que llaman jefes. ¡Qué haríamos sin usted!";
+                    chat = "No sÃ© cÃ³mo es usted capaz de acabar con todas esas abominaciones a las que llaman jefes. Â¡QuÃ© harÃ­amos sin usted!";
                     break;
                 default:
-                    chat = "¡Y además habéis acabado con el abominable esqueleto! He conocido muy pocos héroes de su nivel.";
+                    chat = "Â¡Y ademÃ¡s habÃ©is acabado con el abominable esqueleto! He conocido muy pocos hÃ©roes de su nivel.";
                     break;
  
             }
@@ -227,17 +225,7 @@ namespace HobbitonMod.NPCs.Hobbits
         public override void TownNPCAttackProjSpeed(ref float multiplier, ref float gravityCorrection, ref float randomOffset)
 		{
 			multiplier = 7f;
-		}
-/*
-        public override bool Autoload(ref string name)
-        {
-            base.Autoload(ref name);
-
-            //EventManager.Initialize();
-            //Mod.AddNPC("el Hobbit", new Hobbit());
-            return true;
-        }
-*/ 
+		} 
         //----------------------------------This is an example of how to make the npc use a gun and a projectile ----------------------------------
         /*public override void DrawTownAttackGun(ref float scale, ref int item, ref int closeness) //Allows you to customize how this town NPC's weapon is drawn when this NPC is shooting (this NPC must have an attack type of 1). Scale is a multiplier for the item's drawing size, item is the ID of the item to be drawn, and closeness is how close the item should be drawn to the NPC.
           {

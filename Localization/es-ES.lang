@@ -3,13 +3,6 @@
 Common.Sting=Dardo
 
 ItemName.Sting={$Mods.HobbitonMod.Common.Sting}
-ItemTooltip.Sting="¡La espada brilla cuando se acercan enemigos!"
+ItemTooltip.Sting=¡La espada brilla cuando se acercan enemigos!
 
-
-# Traducciones de las conversaciones con el Hobbit - Traslation of NPC conversations
-
-Config.chat1="¡Hola! ¿Sabes cómo llegar a la Comarca? Creo que me he perdido..."
-Config.chat2="¿Necesitas algo?"
-Config.chat3="¡Menuda casa! Sólo unos pocos pueden permitirse algo así en la Comarca."
-Config.chat4="¿Tienes fuego?"
-Config.chat5="Un día tengo que invitarte al Pony Pisador. Menudas birras ponen ahí. Son caras pero merece la pena."
+ItemName.PlaceableHobbitWall=Pared de agujero hobbit

@@ -2,4 +2,4 @@ This mod, so far, simply adds a new NPC Hobbit to your town.
 
 He sells several items a hobbit would, such as fishing items, ale, barrels, benches... and some more!
 
-Also, the conversation lines are custom (Spanish and English).
+Also, the conversation lines are custom (These are in spanish, but I'm looking for a way to translate them to other languages).

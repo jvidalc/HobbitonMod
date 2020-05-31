@@ -1,12 +1,8 @@
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using System.Linq;
-using System;
-using log4net.Repository.Hierarchy;
 
-namespace HobbitonMod.Items
+namespace HobbitonMod.Items.Weapons
 {
     public class Sting : ModItem
     {
@@ -23,7 +19,7 @@ namespace HobbitonMod.Items
             item.useStyle = ItemUseStyleID.SwingThrow;
             item.useTime = 9;
             item.useAnimation = 20; // 30 = half a second (Terraria runs at 60frames/sec)
-            item.damage = 35;
+            item.damage = 55;
             item.melee = true;
             item.knockBack = 2;
             item.autoReuse = true; // "Auto swing"
@@ -45,10 +41,7 @@ namespace HobbitonMod.Items
                     Lighting.AddLight(player.Center, 0.135f * brightnessIntensity, 0.217f * brightnessIntensity, 0.211f * brightnessIntensity);
         }
 
-        public override void AutoLightSelect(ref bool dryTorch, ref bool wetTorch, ref bool glowstick)
-        {
-            wetTorch = true;
-        }
+        public override void AutoLightSelect(ref bool dryTorch, ref bool wetTorch, ref bool glowstick) => wetTorch = true;
 
 
         public override void AddRecipes()
