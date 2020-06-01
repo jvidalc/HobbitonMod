@@ -91,9 +91,71 @@ namespace HobbitonMod.NPCs.Hobbits
                 openShop = true;   //so when you click on buy button opens the shop
             }
         }
- 
-        public override void SetupShop(Chest shop, ref int nextSlot)       //Allows you to add items to this town NPC's shop. Add an item by setting the defaults of shop.item[nextSlot] then incrementing nextSlot.
+
+        //Allows you to add items to this town NPC's shop. Add an item by setting the defaults of shop.item[nextSlot] then incrementing nextSlot.
+        public override void SetupShop(Chest shop, ref int nextSlot)
         {
+            
+            shop.item[nextSlot].SetDefaults(ItemID.Mushroom);
+            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 0, 15);
+            shop.item[nextSlot].shopCustomPrice = 15;
+            nextSlot++;
+
+            shop.item[nextSlot].SetDefaults(ItemID.BottledHoney);
+            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 5, 50);
+            nextSlot++;
+
+            shop.item[nextSlot].SetDefaults(ItemID.Barrel);
+            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 3, 20);
+            nextSlot++;
+
+            shop.item[nextSlot].SetDefaults(ItemID.Bench);
+            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 5, 0);
+            nextSlot++;
+
+            shop.item[nextSlot].SetDefaults(ItemID.Fireplace);
+            shop.item[nextSlot].shopCustomPrice = 75;
+            nextSlot++;
+
+            shop.item[nextSlot].SetDefaults(ItemID.BugNet);
+            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 7, 75);
+            nextSlot++;
+
+            shop.item[nextSlot].SetDefaults(ItemID.Sickle);
+            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 15, 0);
+            nextSlot++;
+
+            shop.item[nextSlot].SetDefaults(ItemID.PumpkinPie);
+            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 3, 25);
+            nextSlot++;
+
+            shop.item[nextSlot].SetDefaults(ItemID.WoodFishingPole);
+            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 7, 75);
+            nextSlot++;
+
+            shop.item[nextSlot].SetDefaults(ItemID.Ale);
+            nextSlot++;
+
+
+            // v1.4 Items
+            /*
+            shop.item[nextSlot].SetDefaults(ItemID.Lemon);
+            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 0, 15);
+            nextSlot++; 
+
+            shop.item[nextSlot].SetDefaults(ItemID.RoastedBird);
+            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 0, 15);
+            nextSlot++; 
+
+            shop.item[nextSlot].SetDefaults(ItemID.RoastedDuck);
+            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 0, 15);
+            nextSlot++; 
+
+            shop.item[nextSlot].SetDefaults(ItemID.Grapes);
+            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 0, 15);
+            nextSlot++;
+            */
+
             if (NPC.downedBoss1)   // Eye of Cthulhu
             {
                 shop.item[nextSlot].SetDefaults(2674);  //Apprentice Bait
@@ -102,46 +164,22 @@ namespace HobbitonMod.NPCs.Hobbits
             if (NPC.downedBoss2)   // 2nd Boss 
             {
                 shop.item[nextSlot].SetDefaults(2291);   //Reinforced Fishing Pole
+                shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 50, 75);
                 nextSlot++;
             }
             if (NPC.downedBoss3)   // Skeletron 
             {
                 shop.item[nextSlot].SetDefaults(mod.ItemType("Sting")); //Custom item: Sting
+                shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 25, 0, 0);
+                nextSlot++;
+
+            }
+            if (Main.hardMode)     // Wall of Flesh
+            {
+                shop.item[nextSlot].SetDefaults(mod.ItemType("PhialOfGaladriel")); //Custom item: Phial of Galadriel
+                shop.item[nextSlot].shopCustomPrice = Item.buyPrice(1, 0, 0, 0);
                 nextSlot++;
             }
-            shop.item[nextSlot].SetDefaults(ItemID.Mushroom);
-            nextSlot++; 
-            shop.item[nextSlot].SetDefaults(ItemID.BottledHoney);
-            nextSlot++; 
-            shop.item[nextSlot].SetDefaults(ItemID.Barrel);
-            nextSlot++; 
-            shop.item[nextSlot].SetDefaults(ItemID.Bench);
-            nextSlot++; 
-            shop.item[nextSlot].SetDefaults(ItemID.Fireplace);
-            nextSlot++; 
-            shop.item[nextSlot].SetDefaults(ItemID.BugNet);
-            nextSlot++; 
-            shop.item[nextSlot].SetDefaults(ItemID.Sickle);
-            nextSlot++; 
-            shop.item[nextSlot].SetDefaults(ItemID.PumpkinPie);
-            nextSlot++; 
-            shop.item[nextSlot].SetDefaults(ItemID.WoodFishingPole);
-            nextSlot++; 
-            shop.item[nextSlot].SetDefaults(ItemID.Ale);
-            nextSlot++;
-
-
-            // v1.4 Items
-            /*
-            shop.item[nextSlot].SetDefaults(ItemID.Lemon);
-            nextSlot++; 
-            shop.item[nextSlot].SetDefaults(ItemID.RoastedBird);
-            nextSlot++; 
-            shop.item[nextSlot].SetDefaults(ItemID.RoastedDuck);
-            nextSlot++; 
-            shop.item[nextSlot].SetDefaults(ItemID.Grapes);
-            nextSlot++; 
-            */
         }
 
         public override string GetChat()       //Allows you to give this town NPC a chat message when a player talks to it.

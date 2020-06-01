@@ -6,3 +6,6 @@ ItemName.Sting={$Mods.HobbitonMod.Common.Sting}
 ItemTooltip.Sting=¡La espada brilla cuando se acercan enemigos!
 
 ItemName.PlaceableHobbitWall=Pared de agujero hobbit
+
+ItemName.PhialOfGaladriel=Luz de Eärendil
+ItemTooltip.PhialOfGaladriel=Que ella te ilumine en los lugares oscuros cuando las demás luces se apaguen
