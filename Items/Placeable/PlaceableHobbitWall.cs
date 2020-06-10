@@ -24,14 +24,6 @@ namespace HobbitonMod.Items.Placeable
 			item.consumable = true;
 			item.createWall = WallType<Walls.HobbitWall>();
 		}
-		/*
-		public override void AddRecipes()
-		{
-			ModRecipe recipe = new ModRecipe(mod);
-			recipe.AddIngredient(ItemID.DirtBlock);
-			recipe.SetResult(this, 4);
-			recipe.AddRecipe();
-		}
-		*/
+
 	}
 }
