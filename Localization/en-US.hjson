@@ -1,0 +1,37 @@
+Mods: {
+	HobbitonMod: {
+		Common: {
+			Sting: Sting
+		}
+
+		TownNPCMood: {
+			Hobbit: {
+				# This is what displays during all of an NPC's happiness levels.
+				Content: "It's being a great day today."
+				NoHome: "I can hardly remember what a real home is like..."
+				FarFromHome: "Could you tell me in which direction is the shire?"
+				LoveSpace: "I love the serenity of this place."
+				DislikeCrowded: "There are too many people around, it makes it hard for me to remember the shire."
+				HateCrowded: "This place is so crowded I can't even light up my pipe!"
+				LoveBiome: "I would spend my whole life in this place."
+				LikeBiome: "{BiomeName} seems a great place to live and dig a hobbit-hole."
+				DislikeBiome: "I have a bad feeling about this place..."
+				HateBiome: "This place is terrifying, let's get out of here as soon as possible!"
+				LoveNPC: "This world needs more people like {NPCName}."
+				LikeNPC: "Glad to see {NPCName} around."
+				DislikeNPC: "Now that I see {NPCName}... I think I have to leave."
+				HateNPC: "I can't stand having to cross paths with {NPCName}! I want to live in peace."
+				LikeNPC_Princess: "Is {NPCName} a princess? The last one I knew was an elf and lived in a hidden valley!"
+				Princess_LovesNPC: "What a handsome hobbit is {NPCName}. I love everything about him."
+			}
+		}
+		
+		ItemName: {
+			Sting: "{$Mods.HobbitonMod.Common.Sting}"
+		}
+
+		ItemTooltip: {
+			Sting: '''"It shines when enemies are nearby!"'''
+		}
+	}
+}
