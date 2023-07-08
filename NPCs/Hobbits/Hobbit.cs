@@ -37,18 +37,18 @@ namespace HobbitonMod.NPCs.Hobbits
             NPCID.Sets.AttackFrameCount[NPC.type] = 4;
             NPCID.Sets.DangerDetectRange[NPC.type] = 150; //this defines the npc danger detect range
             NPCID.Sets.AttackType[NPC.type] = 0; //this is the attack type,  0 (throwing), 1 (shooting), or 2 (magic). 3 (melee)
-            NPCID.Sets.AttackTime[NPC.type] = 30; //this defines the npc attack speed
+            NPCID.Sets.AttackTime[NPC.type] = 15; //this defines the npc attack speed
             NPCID.Sets.AttackAverageChance[NPC.type] = 10; //this defines the npc atack chance
             NPCID.Sets.HatOffsetY[NPC.type] = 4; //this defines the party hat position
 
             // Influences how the NPC looks in the Bestiary
             NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
             {
-                Velocity = .75f, // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
+                Velocity = .5f, // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
                 Direction = -1 // -1 is left and 1 is right. NPCs are drawn facing the left by default but ExamplePerson will be drawn facing the right
-                              // Rotation = MathHelper.ToRadians(180) // You can also change the rotation of an NPC. Rotation is measured in radians
-                              // If you want to see an example of manually modifying these when the NPC is drawn, see PreDraw
-                              
+                               // Rotation = MathHelper.ToRadians(180) // You can also change the rotation of an NPC. Rotation is measured in radians
+                               // If you want to see an example of manually modifying these when the NPC is drawn, see PreDraw
+
             };
 
             NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
@@ -186,12 +186,12 @@ namespace HobbitonMod.NPCs.Hobbits
 
             if (NPC.downedBoss1)   // Eye of Cthulhu
             {
-                shop.item[nextSlot].SetDefaults(2674);  //Apprentice Bait
+                shop.item[nextSlot].SetDefaults(ItemID.ApprenticeBait);
                 nextSlot++;
             }
             if (NPC.downedBoss2)   // 2nd Boss 
             {
-                shop.item[nextSlot].SetDefaults(2291);   //Reinforced Fishing Pole
+                shop.item[nextSlot].SetDefaults(ItemID.ReinforcedFishingPole);
                 shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 50, 75);
                 nextSlot++;
             }
@@ -248,12 +248,11 @@ namespace HobbitonMod.NPCs.Hobbits
         //Item is the Texture2D instance of the item to be drawn (use Main.itemTexture[id of item]), itemSize is the width and height of the item's hitbox
         public override void DrawTownAttackSwing(ref Texture2D item, ref int itemSize, ref float scale, ref Vector2 offset)
         {
+            // Won't affect: this NPC must have an attack type of 3 for this to make sense
             scale = .8f;
             //int itemType = ModContent.ItemType<Items.Weapons.Sting>()
             //Main.GetItemDrawFrame(ModContent.ItemType<Items.Weapons.Sting>(), out item, out itemFrame);
-            itemSize = 56;
-            offset.X -= 12;
-            offset.Y -= 12;
+            scale /= 1.5f;
         }
 
         //Allows you to determine the width and height of the item this town NPC swings when it attacks, which controls the range of this NPC's swung weapon.
@@ -261,13 +260,6 @@ namespace HobbitonMod.NPCs.Hobbits
         {
             itemWidth = 56;
             itemHeight = 56;
-        }
-
-        public override void DrawTownAttackGun(ref float scale, ref int item, ref int closeness)
-        {
-            scale = 1f;
-            item = 266;
-            closeness = 20;
         }
 
         public override void TownNPCAttackProj(ref int projType, ref int attackDelay)
