@@ -3,6 +3,7 @@
 
 ## Ignore VS stuff
 *.sln
+*.csproj
 .vs
 bin/
 obj/
