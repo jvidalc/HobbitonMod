@@ -1,7 +1,9 @@
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Linq;
 using Terraria;
+using Terraria.GameContent.Personalities;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -13,28 +15,68 @@ namespace HobbitonMod.NPCs.Hobbits
         public override void SetDefaults()
         {
             //npc.maxSpawn = 1;
+            NPC.GivenName = "Hobbit"; //the name displayed when hovering over the npc ingame.
+            NPC.townNPC = true;
+            NPC.friendly = true;
+            NPC.width = 18; //the npc sprite width
+            NPC.height = 33; //a hobbits height
+            NPC.aiStyle = 7; //this is the npc ai style, 7 is Pasive Ai
+            NPC.defense = 25;  //the npc defense
+            NPC.lifeMax = 200;  // the npc life
+            NPC.HitSound = SoundID.NPCHit1;  //the npc sound when is hit
+            NPC.DeathSound = SoundID.NPCDeath1;  //the npc sound when he dies
+            NPC.knockBackResist = 0.5f;  //the npc knockback resistance
 
-            npc.GivenName = "Hobbit"; //the name displayed when hovering over the npc ingame.
-            npc.townNPC = true;
-            npc.friendly = true;
-            npc.width = 18; //the npc sprite width
-            npc.height = 33; //a hobbits height
-            npc.aiStyle = 7; //this is the npc ai style, 7 is Pasive Ai
-            npc.defense = 25;  //the npc defense
-            npc.lifeMax = 200;  // the npc life
-            npc.HitSound = SoundID.NPCHit1;  //the npc sound when is hit
-            npc.DeathSound = SoundID.NPCDeath1;  //the npc sound when he dies
-            npc.knockBackResist = 0.5f;  //the npc knockback resistance
+            AnimationType = NPCID.Guide;  //this copy the guide animation
+        }
 
-            Main.npcFrameCount[npc.type] = 25; //this defines how many frames the npc sprite sheet has
-            NPCID.Sets.ExtraFramesCount[npc.type] = 9;
-            NPCID.Sets.AttackFrameCount[npc.type] = 4;
-            NPCID.Sets.DangerDetectRange[npc.type] = 150; //this defines the npc danger detect range
-            NPCID.Sets.AttackType[npc.type] = 0; //this is the attack type,  0 (throwing), 1 (shooting), or 2 (magic). 3 (melee)
-            NPCID.Sets.AttackTime[npc.type] = 30; //this defines the npc attack speed
-            NPCID.Sets.AttackAverageChance[npc.type] = 10; //this defines the npc atack chance
-            NPCID.Sets.HatOffsetY[npc.type] = 4; //this defines the party hat position
-            animationType = NPCID.Guide;  //this copy the guide animation
+        public override void SetStaticDefaults()
+        {
+            Main.npcFrameCount[NPC.type] = 25; //this defines how many frames the npc sprite sheet has
+            NPCID.Sets.ExtraFramesCount[NPC.type] = 9;
+            NPCID.Sets.AttackFrameCount[NPC.type] = 4;
+            NPCID.Sets.DangerDetectRange[NPC.type] = 150; //this defines the npc danger detect range
+            NPCID.Sets.AttackType[NPC.type] = 0; //this is the attack type,  0 (throwing), 1 (shooting), or 2 (magic). 3 (melee)
+            NPCID.Sets.AttackTime[NPC.type] = 30; //this defines the npc attack speed
+            NPCID.Sets.AttackAverageChance[NPC.type] = 10; //this defines the npc atack chance
+            NPCID.Sets.HatOffsetY[NPC.type] = 4; //this defines the party hat position
+
+            // Influences how the NPC looks in the Bestiary
+            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+            {
+                Velocity = .75f, // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
+                Direction = -1 // -1 is left and 1 is right. NPCs are drawn facing the left by default but ExamplePerson will be drawn facing the right
+                              // Rotation = MathHelper.ToRadians(180) // You can also change the rotation of an NPC. Rotation is measured in radians
+                              // If you want to see an example of manually modifying these when the NPC is drawn, see PreDraw
+                              
+            };
+
+            NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
+
+            InitHappinessParams();
+        }
+
+        private void InitHappinessParams()
+        {
+            //Hobbits will love the wizard
+            NPC.Happiness.
+                SetNPCAffection(NPCID.Wizard, AffectionLevel.Love)
+                .SetNPCAffection(NPCID.Bee, AffectionLevel.Love)
+                .SetNPCAffection(NPCID.Bird, AffectionLevel.Love)
+                .SetNPCAffection(NPCID.Bunny, AffectionLevel.Like)
+                .SetNPCAffection(NPCID.Butterfly, AffectionLevel.Like)
+                .SetNPCAffection(NPCID.OldMan, AffectionLevel.Like)
+                .SetBiomeAffection<ForestBiome>(AffectionLevel.Love)
+                .SetBiomeAffection<DungeonBiome>(AffectionLevel.Like)
+                .SetBiomeAffection<CorruptionBiome>(AffectionLevel.Hate)
+                .SetBiomeAffection<CrimsonBiome>(AffectionLevel.Hate)
+                .SetBiomeAffection<DesertBiome>(AffectionLevel.Dislike)
+                .SetBiomeAffection<HallowBiome>(AffectionLevel.Dislike)
+                .SetBiomeAffection<OceanBiome>(AffectionLevel.Hate)
+            ;
+
+            //Make the wizard love hobbits!
+            NPCHappiness.Get(NPCID.Wizard).SetNPCAffection(ModContent.NPCType<Hobbit>(), AffectionLevel.Love);
         }
 
         public override bool CanTownNPCSpawn(int numTownNPCs, int money)
@@ -53,28 +95,16 @@ namespace HobbitonMod.NPCs.Hobbits
         {
             return true;  //so when a house is available the npc will spawn
         }
-        public override string TownNPCName()     //Allows you to give this town NPC any name when it spawns
+        public override List<string> SetNPCNameList()     //Allows you to give this town NPC any name when it spawns
         {
-            string name;
-            switch (WorldGen.genRand.Next(4))
+            return new List<string>
             {
-                case 0:
-                    name = "Bilbo";
-                    break;
-                case 1:
-                    name = "Frodo";
-                    break;
-                case 2:
-                    name = "Sam";
-                    break;
-                case 3:
-                    name = "Merry";
-                    break;
-                default:
-                    name = "Pippin";
-                    break;
-            }
-            return name;
+                "Bilbo",
+                "Frodo",
+                "Sam",
+                "Merry",
+                "Pippin"
+            };
         }
 
         public override void SetChatButtons(ref string button, ref string button2)  //Allows you to set the text for the buttons that appear on this town NPC's chat window.
@@ -136,25 +166,22 @@ namespace HobbitonMod.NPCs.Hobbits
             shop.item[nextSlot].SetDefaults(ItemID.Ale);
             nextSlot++;
 
-
             // v1.4 Items
-            /*
             shop.item[nextSlot].SetDefaults(ItemID.Lemon);
             shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 0, 15);
-            nextSlot++; 
+            nextSlot++;
 
             shop.item[nextSlot].SetDefaults(ItemID.RoastedBird);
             shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 0, 15);
-            nextSlot++; 
+            nextSlot++;
 
             shop.item[nextSlot].SetDefaults(ItemID.RoastedDuck);
             shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 0, 15);
-            nextSlot++; 
+            nextSlot++;
 
             shop.item[nextSlot].SetDefaults(ItemID.Grapes);
             shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 0, 15);
             nextSlot++;
-            */
 
             if (NPC.downedBoss1)   // Eye of Cthulhu
             {
@@ -169,14 +196,14 @@ namespace HobbitonMod.NPCs.Hobbits
             }
             if (NPC.downedBoss3)   // Skeletron 
             {
-                shop.item[nextSlot].SetDefaults(mod.ItemType("Sting")); //Custom item: Sting
+                shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Weapons.Sting>()); //Custom item: Sting
                 shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 25, 0, 0);
                 nextSlot++;
 
             }
             if (Main.hardMode)     // Wall of Flesh
             {
-                shop.item[nextSlot].SetDefaults(mod.ItemType("PhialOfGaladriel")); //Custom item: Phial of Galadriel
+                shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.PhialOfGaladriel>()); //Custom item: Phial of Galadriel
                 shop.item[nextSlot].shopCustomPrice = Item.buyPrice(1, 0, 0, 0);
                 nextSlot++;
             }
@@ -184,18 +211,18 @@ namespace HobbitonMod.NPCs.Hobbits
 
         public override string GetChat()       //Allows you to give this town NPC a chat message when a player talks to it.
         {
-            CustomChats chatGenerator = new CustomChats();
+            CustomChats chatGenerator = new();
 
-            if (npc.GivenName.Equals("Bilbo"))
+            if (NPC.GivenName.Equals("Bilbo"))
                 return chatGenerator.chatsBilbo.ElementAt(Main.rand.Next(chatGenerator.chatsBilbo.Count));
 
-            else if (npc.GivenName.Equals("Frodo"))
+            else if (NPC.GivenName.Equals("Frodo"))
                 return chatGenerator.chatsFrodo.ElementAt(Main.rand.Next(chatGenerator.chatsFrodo.Count));
 
-            else if (npc.GivenName.Equals("Sam"))
+            else if (NPC.GivenName.Equals("Sam"))
                 return chatGenerator.chatsSam.ElementAt(Main.rand.Next(chatGenerator.chatsSam.Count));
 
-            else if (npc.GivenName.Equals("Merry") || npc.GivenName.Equals("Pippin"))
+            else if (NPC.GivenName.Equals("Merry") || NPC.GivenName.Equals("Pippin"))
                 return chatGenerator.chatsMerryPippin.ElementAt(Main.rand.Next(chatGenerator.chatsMerryPippin.Count));
 
             else return "Hola, ¿necesita algo?";
@@ -220,9 +247,12 @@ namespace HobbitonMod.NPCs.Hobbits
         //Item is the Texture2D instance of the item to be drawn (use Main.itemTexture[id of item]), itemSize is the width and height of the item's hitbox
         public override void DrawTownAttackSwing(ref Texture2D item, ref int itemSize, ref float scale, ref Vector2 offset)
         {
-            scale = 1f;
-            item = Main.itemTexture[mod.ItemType("Sting")]; //this defines the item that this npc will use
+            scale = .8f;
+            //int itemType = ModContent.ItemType<Items.Weapons.Sting>()
+            //Main.GetItemDrawFrame(ModContent.ItemType<Items.Weapons.Sting>(), out item, out itemFrame);
             itemSize = 56;
+            offset.X -= 12;
+            offset.Y -= 12;
         }
 
         //Allows you to determine the width and height of the item this town NPC swings when it attacks, which controls the range of this NPC's swung weapon.

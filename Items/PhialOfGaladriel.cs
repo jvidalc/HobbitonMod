@@ -14,21 +14,21 @@ namespace HobbitonMod.Items
 
         public override void SetDefaults()
         {
-            //item.Name = "Phial of Galadriel"; // The item display name in-game. Read-only.
+            //Item.Name = "Phial of Galadriel"; // The item display name in-game. Read-only.
             
-            item.useStyle = ItemUseStyleID.HoldingUp;
-            item.useTime = 10;
-            item.useAnimation = 15;
-            item.autoReuse = true; // "Torch-like"
-            item.useTurn = true;
+            Item.useStyle = ItemUseStyleID.HoldUp;
+            Item.useTime = 10;
+            Item.useAnimation = 15;
+            Item.autoReuse = true; // "Torch-like"
+            Item.useTurn = true;
 
-            item.consumable = false;
-            item.uniqueStack = true;
-            item.scale = 0.75f;
-            item.width = 16;
-            item.height = 16;
-            item.rare = ItemRarityID.Yellow;
-            item.value = Item.buyPrice(1, 0, 0, 0); // The items value in PGSC.
+            Item.consumable = false;
+            Item.uniqueStack = true;
+            Item.scale = 0.75f;
+            Item.width = 16;
+            Item.height = 16;
+            Item.rare = ItemRarityID.Yellow;
+            Item.value = Item.buyPrice(1, 0, 0, 0); // The items value in PGSC.
             
         }
 

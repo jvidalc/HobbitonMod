@@ -13,24 +13,24 @@ namespace HobbitonMod.Items.Weapons
 
         public override void SetDefaults()
         {
-            //item.Name = "Sting"; // The item display name in-game. Read-only.
+            //Item.Name = "Sting"; // The item's display name in-game. Read-only.
 
             //Weapon attributes
-            item.useStyle = ItemUseStyleID.SwingThrow;
-            item.useTime = 9;
-            item.useAnimation = 20; // 30 = half a second (Terraria runs at 60frames/sec)
-            item.damage = 55;
-            item.melee = true;
-            item.knockBack = 2;
-            item.autoReuse = true; // "Auto swing"
+            Item.useStyle = ItemUseStyleID.Swing;
+            Item.useTime = 9;
+            Item.useAnimation = 20; // 30 = half a second (Terraria runs at 60frames/sec)
+            Item.damage = 55;
+            Item.noMelee = false;
+            Item.knockBack = 2;
+            Item.autoReuse = true; // "Auto swing"
 
-            item.UseSound = SoundID.Item1;
-            item.width = 16;
-            item.height = 16;
-            item.rare = ItemRarityID.Yellow;  // yellow color
-            item.value = Item.buyPrice(0, 25, 0, 0); // The items value in PGSC.
+            Item.UseSound = SoundID.Item1;
+            Item.width = 16;
+            Item.height = 16;
+            Item.rare = ItemRarityID.Yellow;  // yellow color
+            Item.value = Item.buyPrice(0, 25, 0, 0); // The items value in PGSC
 
-            //item.holdStyle = 1;
+            //Item.holdStyle = 1;
         }
 
         public override void HoldItem(Player player)
@@ -46,14 +46,14 @@ namespace HobbitonMod.Items.Weapons
 
         public override void AddRecipes()
         {
-            ModRecipe r = new ModRecipe(mod);
+            var r = Recipe.Create(ModContent.ItemType<Sting>());
             r.AddIngredient(ItemID.MythrilBar, 20);
             r.AddIngredient(ItemID.SoulofLight, 10);
             r.AddIngredient(ItemID.CrystalShard, 5);
             r.AddIngredient(ItemID.DirtBlock, 1);
             r.AddTile(TileID.MythrilAnvil);
-            r.SetResult(this);
-            r.AddRecipe();
+            //r.Create();
+            r.Register();
         }
     }
 }
