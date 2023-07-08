@@ -164,23 +164,24 @@ namespace HobbitonMod.NPCs.Hobbits
             nextSlot++;
 
             shop.item[nextSlot].SetDefaults(ItemID.Ale);
+            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 10, 0);
             nextSlot++;
 
             // v1.4 Items
             shop.item[nextSlot].SetDefaults(ItemID.Lemon);
-            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 0, 15);
+            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 25, 0);
             nextSlot++;
 
             shop.item[nextSlot].SetDefaults(ItemID.RoastedBird);
-            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 0, 15);
+            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 50, 0);
             nextSlot++;
 
             shop.item[nextSlot].SetDefaults(ItemID.RoastedDuck);
-            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 0, 15);
+            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 84, 00); // Default price for Roasted duck
             nextSlot++;
 
             shop.item[nextSlot].SetDefaults(ItemID.Grapes);
-            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 0, 15);
+            //shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 60, 0);
             nextSlot++;
 
             if (NPC.downedBoss1)   // Eye of Cthulhu
