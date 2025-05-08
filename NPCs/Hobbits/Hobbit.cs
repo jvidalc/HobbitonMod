@@ -1,5 +1,7 @@
+using HobbitonMod.Items.Weapons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
@@ -116,14 +118,9 @@ namespace HobbitonMod.NPCs.Hobbits
         //The firstButton parameter tells whether the first button or second button (button and button2 from SetChatButtons) was clicked. Set the shop parameter to true to open this NPC's shop.
         public override void OnChatButtonClicked(bool firstButton, ref string shopName)
         {
-            if (firstButton)
-                shopName = "Tienda Hobbit";   //so when you click on buy button opens the shop
+            if (firstButton) shopName = "Shop";   //so when you click on buy button opens the shop
         }
 
-        /// <summary>
-        /// Allows you to add shops to this NPC, similar to adding recipes for items. <br/>
-        /// Make a new <see cref="NPCShop"/>, and items to it, and call <see cref="AbstractNPCShop.Register"/>
-        /// </summary>
         public override void AddShops()
         {
             base.AddShops();
@@ -143,47 +140,32 @@ namespace HobbitonMod.NPCs.Hobbits
                 .Add(ItemID.RoastedDuck)
                 .Add(ItemID.Grapes)
                 .Register();
-
         }
 
-        /// <summary>
-        /// Allows you to modify the contents of a shop whenever player opens it. <br/>
-        /// To create a shop, use <see cref="AddShops"/> <br/>
-        /// Note that for special shops like travelling merchant, the <paramref name="shopName"/> may not correspond to a <see cref="NPCShop"/> in the <see cref="NPCShopDatabase"/>
-        /// <para/> Also note that unused slots in <paramref name="items"/> are null while <see cref="Item.IsAir"/> entries are entries that have a reserved slot (<see cref="NPCShop.Entry.SlotReserved"/>) but did not have their conditions met. These should not be overwritten.
-        /// </summary>
-        /// <param name="shopName">The full name of the shop being opened. See <see cref="NPCShopDatabase.GetShopName"/> for the format. </param>
-        /// <param name="items">Items in the shop including 'air' items in empty slots.</param>
-        //public override void ModifyActiveShop(string shopName, Item[] items)
-        //{
-        //    int nextSlot = 0;
-        //    if (NPC.downedBoss1)   // Eye of Cthulhu
-        //    {
-        //        items[nextSlot].SetDefaults(ItemID.ApprenticeBait);
-        //        nextSlot++;
-        //    }
-        //    if (NPC.downedBoss2)   // 2nd Boss 
-        //    {
-        //        items[nextSlot].SetDefaults(ItemID.ReinforcedFishingPole);
-        //        items[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 50, 75);
-        //        nextSlot++;
-        //    }
-        //    if (NPC.downedBoss3)   // Skeletron 
-        //    {
-        //        items[nextSlot].SetDefaults(ModContent.ItemType<Items.Weapons.Sting>()); //Custom item: Sting
-        //        items[nextSlot].shopCustomPrice = Item.buyPrice(0, 25, 0, 0);
-        //        nextSlot++;
+        public override void ModifyActiveShop(string shopName, Item[] items)
+        {
+            // Count how many items are already added
+            int nextSlot = 0;
+            foreach (Item item in items)
+            {
+                if (item == null) break;
+                nextSlot++;
+            }
 
-        //    }
-        //    if (Main.hardMode)     // Wall of Flesh
-        //    {
-        //        items[nextSlot].SetDefaults(ModContent.ItemType<Items.PhialOfGaladriel>()); //Custom item: Phial of Galadriel
-        //        items[nextSlot].shopCustomPrice = Item.buyPrice(1, 0, 0, 0);
-        //        nextSlot++;
-        //    }
-        //}
+            if (NPC.downedBoss1)   // Eye of Cthulhu
+                items[nextSlot++] = new Item(ItemID.ApprenticeBait);
+         
+            if (NPC.downedBoss2)   // Eater of Worlds / Brain of Cthulhu 
+                items[nextSlot++] = new Item(ItemID.ReinforcedFishingPole);
+            
+            if (NPC.downedBoss3)   // Skeletron 
+                items[nextSlot++] = new Item(ModContent.ItemType<Sting>());
+            
+            if (Main.hardMode)     // Wall of Flesh
+                items[nextSlot++] = new Item(ModContent.ItemType<Items.PhialOfGaladriel>());
+        }
 
-        public override string GetChat()       //Allows you to give this town NPC a chat message when a player talks to it.
+        public override string GetChat()       
         {
             CustomChats chatGenerator = new();
 
@@ -199,7 +181,7 @@ namespace HobbitonMod.NPCs.Hobbits
             else if (NPC.GivenName.Equals("Merry") || NPC.GivenName.Equals("Pippin"))
                 return chatGenerator.chatsMerryPippin.ElementAt(Main.rand.Next(chatGenerator.chatsMerryPippin.Count));
 
-            else return "Hola, ?necesita algo?";
+            else return "Hola, ¿necesita algo?";
         }
 
         //  Allows you to determine the damage and knockback of this town NPC attack

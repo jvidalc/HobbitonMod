@@ -10,3 +10,6 @@ obj/
 
 ## Specific files
 *.ico
+
+## .targets file
+*.targets
