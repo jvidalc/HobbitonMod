@@ -7,7 +7,7 @@ namespace HobbitonMod.Items.Placeable
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("Pared de prueba");
+            // Tooltip.SetDefault("Pared de prueba");
         }
 
         public override void SetDefaults()

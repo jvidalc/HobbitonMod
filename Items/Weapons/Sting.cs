@@ -8,7 +8,9 @@ namespace HobbitonMod.Items.Weapons
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("It shines when enemies are nearby!");
+            // Tooltip.SetDefault("It shines when enemies are nearby!");
+            ItemID.Sets.Torches[Type] = true;
+            ItemID.Sets.WaterTorches[Type] = true;
         }
 
         public override void SetDefaults()
@@ -41,16 +43,12 @@ namespace HobbitonMod.Items.Weapons
                     Lighting.AddLight(player.Center, 0.135f * brightnessIntensity, 0.217f * brightnessIntensity, 0.211f * brightnessIntensity);
         }
 
-        public override void AutoLightSelect(ref bool dryTorch, ref bool wetTorch, ref bool glowstick) => wetTorch = true;
-
-
         public override void AddRecipes()
         {
             var r = Recipe.Create(ModContent.ItemType<Sting>());
             r.AddIngredient(ItemID.MythrilBar, 20);
             r.AddIngredient(ItemID.SoulofLight, 10);
             r.AddIngredient(ItemID.CrystalShard, 5);
-            r.AddIngredient(ItemID.DirtBlock, 1);
             r.AddTile(TileID.MythrilAnvil);
             //r.Create();
             r.Register();

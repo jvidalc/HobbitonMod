@@ -1,7 +1,7 @@
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.GameContent.Personalities;
 using Terraria.ID;
@@ -42,7 +42,7 @@ namespace HobbitonMod.NPCs.Hobbits
             NPCID.Sets.HatOffsetY[NPC.type] = 4; //this defines the party hat position
 
             // Influences how the NPC looks in the Bestiary
-            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers(0)
+            NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new NPCID.Sets.NPCBestiaryDrawModifiers()
             {
                 Velocity = .5f, // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
                 Direction = -1 // -1 is left and 1 is right. NPCs are drawn facing the left by default but ExamplePerson will be drawn facing the right
@@ -79,7 +79,7 @@ namespace HobbitonMod.NPCs.Hobbits
             NPCHappiness.Get(NPCID.Wizard).SetNPCAffection(ModContent.NPCType<Hobbit>(), AffectionLevel.Love);
         }
 
-        public override bool CanTownNPCSpawn(int numTownNPCs, int money)
+        public override bool CanTownNPCSpawn(int numTownNPCs)
         {
             //if (npc.downedBoss0 == true) // "npc.downedBoss1 == true" means "if 1st boss is killed"
             //    {
@@ -114,101 +114,74 @@ namespace HobbitonMod.NPCs.Hobbits
 
         //Allows you to make something happen whenever a button is clicked on this town NPC's chat window.
         //The firstButton parameter tells whether the first button or second button (button and button2 from SetChatButtons) was clicked. Set the shop parameter to true to open this NPC's shop.
-        public override void OnChatButtonClicked(bool firstButton, ref bool openShop)
+        public override void OnChatButtonClicked(bool firstButton, ref string shopName)
         {
             if (firstButton)
-            {
-                openShop = true;   //so when you click on buy button opens the shop
-            }
+                shopName = "Tienda Hobbit";   //so when you click on buy button opens the shop
         }
 
-        //Allows you to add items to this town NPC's shop. Add an item by setting the defaults of shop.item[nextSlot] then incrementing nextSlot.
-        public override void SetupShop(Chest shop, ref int nextSlot)
+        /// <summary>
+        /// Allows you to add shops to this NPC, similar to adding recipes for items. <br/>
+        /// Make a new <see cref="NPCShop"/>, and items to it, and call <see cref="AbstractNPCShop.Register"/>
+        /// </summary>
+        public override void AddShops()
         {
+            base.AddShops();
+            new NPCShop(Type)
+                .Add(ItemID.Mushroom)
+                .Add(ItemID.BottledHoney)
+                .Add(ItemID.Barrel)
+                .Add(ItemID.Bench)
+                .Add(ItemID.Fireplace)
+                .Add(ItemID.BugNet)
+                .Add(ItemID.Sickle)
+                .Add(ItemID.PumpkinPie)
+                .Add(ItemID.WoodFishingPole)
+                .Add(ItemID.Ale)
+                .Add(ItemID.Lemon)
+                .Add(ItemID.RoastedBird)
+                .Add(ItemID.RoastedDuck)
+                .Add(ItemID.Grapes)
+                .Register();
 
-            shop.item[nextSlot].SetDefaults(ItemID.Mushroom);
-            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 0, 15);
-            shop.item[nextSlot].shopCustomPrice = 15;
-            nextSlot++;
-
-            shop.item[nextSlot].SetDefaults(ItemID.BottledHoney);
-            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 5, 50);
-            nextSlot++;
-
-            shop.item[nextSlot].SetDefaults(ItemID.Barrel);
-            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 3, 20);
-            nextSlot++;
-
-            shop.item[nextSlot].SetDefaults(ItemID.Bench);
-            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 5, 0);
-            nextSlot++;
-
-            shop.item[nextSlot].SetDefaults(ItemID.Fireplace);
-            shop.item[nextSlot].shopCustomPrice = 75;
-            nextSlot++;
-
-            shop.item[nextSlot].SetDefaults(ItemID.BugNet);
-            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 7, 75);
-            nextSlot++;
-
-            shop.item[nextSlot].SetDefaults(ItemID.Sickle);
-            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 15, 0);
-            nextSlot++;
-
-            shop.item[nextSlot].SetDefaults(ItemID.PumpkinPie);
-            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 3, 25);
-            nextSlot++;
-
-            shop.item[nextSlot].SetDefaults(ItemID.WoodFishingPole);
-            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 7, 75);
-            nextSlot++;
-
-            shop.item[nextSlot].SetDefaults(ItemID.Ale);
-            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 10, 0);
-            nextSlot++;
-
-            // v1.4 Items
-            shop.item[nextSlot].SetDefaults(ItemID.Lemon);
-            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 25, 0);
-            nextSlot++;
-
-            shop.item[nextSlot].SetDefaults(ItemID.RoastedBird);
-            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 50, 0);
-            nextSlot++;
-
-            shop.item[nextSlot].SetDefaults(ItemID.RoastedDuck);
-            shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 84, 00); // Default price for Roasted duck
-            nextSlot++;
-
-            shop.item[nextSlot].SetDefaults(ItemID.Grapes);
-            //shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 60, 0);
-            nextSlot++;
-
-            if (NPC.downedBoss1)   // Eye of Cthulhu
-            {
-                shop.item[nextSlot].SetDefaults(ItemID.ApprenticeBait);
-                nextSlot++;
-            }
-            if (NPC.downedBoss2)   // 2nd Boss 
-            {
-                shop.item[nextSlot].SetDefaults(ItemID.ReinforcedFishingPole);
-                shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 50, 75);
-                nextSlot++;
-            }
-            if (NPC.downedBoss3)   // Skeletron 
-            {
-                shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Weapons.Sting>()); //Custom item: Sting
-                shop.item[nextSlot].shopCustomPrice = Item.buyPrice(0, 25, 0, 0);
-                nextSlot++;
-
-            }
-            if (Main.hardMode)     // Wall of Flesh
-            {
-                shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.PhialOfGaladriel>()); //Custom item: Phial of Galadriel
-                shop.item[nextSlot].shopCustomPrice = Item.buyPrice(1, 0, 0, 0);
-                nextSlot++;
-            }
         }
+
+        /// <summary>
+        /// Allows you to modify the contents of a shop whenever player opens it. <br/>
+        /// To create a shop, use <see cref="AddShops"/> <br/>
+        /// Note that for special shops like travelling merchant, the <paramref name="shopName"/> may not correspond to a <see cref="NPCShop"/> in the <see cref="NPCShopDatabase"/>
+        /// <para/> Also note that unused slots in <paramref name="items"/> are null while <see cref="Item.IsAir"/> entries are entries that have a reserved slot (<see cref="NPCShop.Entry.SlotReserved"/>) but did not have their conditions met. These should not be overwritten.
+        /// </summary>
+        /// <param name="shopName">The full name of the shop being opened. See <see cref="NPCShopDatabase.GetShopName"/> for the format. </param>
+        /// <param name="items">Items in the shop including 'air' items in empty slots.</param>
+        //public override void ModifyActiveShop(string shopName, Item[] items)
+        //{
+        //    int nextSlot = 0;
+        //    if (NPC.downedBoss1)   // Eye of Cthulhu
+        //    {
+        //        items[nextSlot].SetDefaults(ItemID.ApprenticeBait);
+        //        nextSlot++;
+        //    }
+        //    if (NPC.downedBoss2)   // 2nd Boss 
+        //    {
+        //        items[nextSlot].SetDefaults(ItemID.ReinforcedFishingPole);
+        //        items[nextSlot].shopCustomPrice = Item.buyPrice(0, 0, 50, 75);
+        //        nextSlot++;
+        //    }
+        //    if (NPC.downedBoss3)   // Skeletron 
+        //    {
+        //        items[nextSlot].SetDefaults(ModContent.ItemType<Items.Weapons.Sting>()); //Custom item: Sting
+        //        items[nextSlot].shopCustomPrice = Item.buyPrice(0, 25, 0, 0);
+        //        nextSlot++;
+
+        //    }
+        //    if (Main.hardMode)     // Wall of Flesh
+        //    {
+        //        items[nextSlot].SetDefaults(ModContent.ItemType<Items.PhialOfGaladriel>()); //Custom item: Phial of Galadriel
+        //        items[nextSlot].shopCustomPrice = Item.buyPrice(1, 0, 0, 0);
+        //        nextSlot++;
+        //    }
+        //}
 
         public override string GetChat()       //Allows you to give this town NPC a chat message when a player talks to it.
         {
@@ -226,7 +199,7 @@ namespace HobbitonMod.NPCs.Hobbits
             else if (NPC.GivenName.Equals("Merry") || NPC.GivenName.Equals("Pippin"))
                 return chatGenerator.chatsMerryPippin.ElementAt(Main.rand.Next(chatGenerator.chatsMerryPippin.Count));
 
-            else return "Hola, ¿necesita algo?";
+            else return "Hola, ?necesita algo?";
         }
 
         //  Allows you to determine the damage and knockback of this town NPC attack
@@ -246,7 +219,7 @@ namespace HobbitonMod.NPCs.Hobbits
 
         //Allows you to customize how this town NPC's weapon is drawn when this NPC is swinging it (this NPC must have an attack type of 3).
         //Item is the Texture2D instance of the item to be drawn (use Main.itemTexture[id of item]), itemSize is the width and height of the item's hitbox
-        public override void DrawTownAttackSwing(ref Texture2D item, ref int itemSize, ref float scale, ref Vector2 offset)
+        public override void DrawTownAttackSwing(ref Texture2D item, ref Rectangle itemFrame, ref int itemSize, ref float scale, ref Vector2 offset)
         {
             // Won't affect: this NPC must have an attack type of 3 for this to make sense
             scale = .8f;

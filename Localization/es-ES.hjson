@@ -1,40 +1,70 @@
 Mods: {
 	HobbitonMod: {
-		Common: {
-			Sting: Dardo
-		}
+		Common.Sting: Dardo
 
 		TownNPCMood: {
 			Hobbit: {
 				# This is what displays during all of an NPC's happiness levels.
-				Content: "El día de hoy está siendo fantástico."
-				NoHome: "Casi no recuerdo lo que es un hogar de verdad..."
-				FarFromHome: "¿Sabría decirme en qué dirección se encuentra la comarca?"
-				LoveSpace: "Me encanta la calma de este lugar."
-				DislikeCrowded: "There are too many people around, it makes it hard for me to focus on mod making."
-				HateCrowded: "I can't test my mod with so many people around!"
-				LoveBiome: "Estaría aquí toda mi vida."
+				Content: El día de hoy está siendo fantástico.
+				NoHome: Casi no recuerdo lo que es un hogar de verdad...
+				FarFromHome: ¿Sabría decirme en qué dirección se encuentra la comarca?
+				LoveSpace: Me encanta la calma de este lugar.
+				DislikeCrowded: There are too many people around, it makes it hard for me to focus on mod making.
+				HateCrowded: I can't test my mod with so many people around!
+				LoveBiome: Estaría aquí toda mi vida.
 				LikeBiome: "{BiomeName} is a very nice place to test mods in."
-				DislikeBiome: "Este lugar me da mala espina..."
-				HateBiome: "Odio este lugar. ¡Salgamos de aquí cuanto antes!"
-				LoveNPC: "Faltan más seres como {NPCName} en este mundo."
-				LikeNPC: "Me alegra ver a {NPCName} por aquí."
-				DislikeNPC: "Ahora que veo a {NPCName}... creo que me tengo que marcharme."
-				HateNPC: "¡No soporto tener que cruzarme con {NPCName}! Quiero vivir en paz."
-				LikeNPC_Princess: "¿{NPCName} es una princesa? ¡La última que conocí era elfa y vivía en un valle escondido!"
-				Princess_LovesNPC: "Qué hobbit tan apuesto es {NPCName}. Adoro todo sobre él."
+				DislikeBiome: Este lugar me da mala espina...
+				HateBiome: Odio este lugar. ¡Salgamos de aquí cuanto antes!
+				LoveNPC: Faltan más seres como {NPCName} en este mundo.
+				LikeNPC: Me alegra ver a {NPCName} por aquí.
+				DislikeNPC: Ahora que veo a {NPCName}... creo que me tengo que marcharme.
+				HateNPC: ¡No soporto tener que cruzarme con {NPCName}! Quiero vivir en paz.
+				LikeNPC_Princess: ¿{NPCName} es una princesa? ¡La última que conocí era elfa y vivía en un valle escondido!
+				Princess_LovesNPC: Qué hobbit tan apuesto es {NPCName}. Adoro todo sobre él.
 			}
 		}
-		
-		ItemName: {
-			Sting: "{$Mods.HobbitonMod.Common.Sting}"
-			PlaceableHobbitWall: Pared de agujero hobbit
-			PhialOfGaladriel: Luz de Eärendil
+
+		ItemName.Sting: "{$Mods.HobbitonMod.Common.Sting}"
+		ItemTooltip.Sting: ¡La espada brilla cuando se acercan enemigos!
+
+		Items: {
+			PhialOfGaladriel: {
+				// DisplayName: Phial Of Galadriel
+				// Tooltip: ""
+			}
+
+			PlaceableHobbitWall: {
+				// DisplayName: Placeable Hobbit Wall
+				// Tooltip: ""
+			}
+
+			Sting: {
+				// DisplayName: Sting
+				// Tooltip: ""
+			}
 		}
 
-		ItemTooltip: {
-			Sting: ¡La espada brilla cuando se acercan enemigos!
-			PhialOfGaladriel: Que ella te ilumine en los lugares oscuros cuando las demás luces se apaguen
+		NPCs: {
+			Hobbit: {
+				// DisplayName: Hobbit
+
+				TownNPCMood: {
+					// Content: "{$Mods.HobbitonMod.TownNPCMood.Hobbit.Content}"
+					// NoHome: "{$Mods.HobbitonMod.TownNPCMood.Hobbit.NoHome}"
+					// FarFromHome: "{$Mods.HobbitonMod.TownNPCMood.Hobbit.FarFromHome}"
+					// LoveSpace: "{$Mods.HobbitonMod.TownNPCMood.Hobbit.LoveSpace}"
+					// DislikeCrowded: "{$Mods.HobbitonMod.TownNPCMood.Hobbit.DislikeCrowded}"
+					// HateCrowded: "{$Mods.HobbitonMod.TownNPCMood.Hobbit.HateCrowded}"
+					// LoveBiome: "{$Mods.HobbitonMod.TownNPCMood.Hobbit.LoveBiome}"
+					// LikeBiome: "{$Mods.HobbitonMod.TownNPCMood.Hobbit.LikeBiome}"
+					// DislikeBiome: "{$Mods.HobbitonMod.TownNPCMood.Hobbit.DislikeBiome}"
+					// HateBiome: "{$Mods.HobbitonMod.TownNPCMood.Hobbit.HateBiome}"
+					// LoveNPC: "{$Mods.HobbitonMod.TownNPCMood.Hobbit.LoveNPC}"
+					// LikeNPC: "{$Mods.HobbitonMod.TownNPCMood.Hobbit.LikeNPC}"
+					// LikeNPC_Princess: "{$Mods.HobbitonMod.TownNPCMood.Hobbit.LikeNPC_Princess}"
+					// Princess_LovesNPC: Me gusta {NPCName}.
+				}
+			}
 		}
 	}
 }

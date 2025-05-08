@@ -11,7 +11,7 @@ namespace HobbitonMod.Items.Walls
         {
             Main.wallHouse[Type] = true;
             //dustType = DustType<Sparkle>();
-            ItemDrop = ItemType<Placeable.PlaceableHobbitWall>();
+            //ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = ItemType<Placeable.PlaceableHobbitWall>();
             AddMapEntry(new Color(150, 150, 150));
         }
 
